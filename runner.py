@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-from file_loader import File_loader
-from text_file_parser import Text_file_parser
+from text_toSrtConverter import Text_To_Srt_Converter
 import argparse
 
 __author__ = 'bogna'
@@ -27,12 +26,13 @@ def main():
     args, unknown = parser.parse_known_args()
 
     if args.text_file:
-        file_parser = Text_file_parser(text_file=args.text_file)
+        file_parser = Text_To_Srt_Converter(text_file=args.text_file)
         file_parser.open_file()
         file_parser.check_text_file()
-        file_parser.get_frames_from_txt_file()
+        file_parser.get_subs_from_txt_file()
         file_parser.get_frames_per_second(unknown[0])
-
+        file_parser.convert_from_frames_to_millis()
+        file_parser.create_srt_file()
 
 
 if __name__ == '__main__':
